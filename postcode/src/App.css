@@ -9,6 +9,7 @@
 
 .App-header {
   background-color: #222;
+  height: 150px;
   padding: 20px;
   color: white;
 }
@@ -21,16 +22,6 @@
   font-size: large;
 }
 
-.text-color-lemon { 
-  color: #8ce40e!important; 
-} 
-.marker{
-    border: 5px solid #f44336;
-    background-color: white;
-    text-align: center;
-    color: #3f51b5;
-    font-weight: bold!important;
-}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

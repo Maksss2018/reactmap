@@ -39,30 +39,38 @@ server.post("/get-nearest-places", function(req, res) {
     }, 500)
 });
 server.post("/", function(req, res) {
-    let isUserSignIn = req.body;
-    db.isSignIn(isUserSignIn).then((data) => res.send(data)).catch((error) => console.log(error));
-
-
+    let newUser = req.body;
+    db.addNewUser(newUser).then((data) => res.send(data)).catch((error) => console.log(error));
+        console.log("new user");
 });
 
-server.post("/sign-in", function(req, res) {
-    let passAndLogin = req.body;
-    db.addNewUser(passAndLogin).then((data) => res.send(data)).catch((error) => console.log(error));
 
+server.post("/check-marks", function(req, res) {
+    let data = req.body;
+    db.CheckingData(data).then((data) => res.send(data)).catch((error) => console.log(error));
+        console.log("Checking this data-------");
+        console.log(data);
+        console.log("Checking this data-------");
+});
+server.post("/getNewUserData", function(req, res) {
+    let newUserData = req.body;
+    console.log("geted new data!!!!!!");
+    if(newUserData.user!="new"||newUserData.user!=undefined){
+        db.updateUserData(newUserData).then((data) => res.send(data)).catch((error) => console.log(error));
+    }else{
+        db.addNewUser(newUserData).then((data) => res.send(data)).catch((error) => console.log(error));
+    console.log("new user");
+        
+    };
 });
 
-server.post("/in-out", function(req, res) {
-    let inOut = req.body;
-    db.loginLogoutAPI(inOut).then((data) => res.send(data)).catch((error) => console.log(error));
-    console.log("Now he is " + inOut);
+server.post("/dbState", function(req, res) {
+    let token = req.body;
+    db.dbChanges(token).then((data) => res.send(data)).catch((error) => console.log(error));
+    console.log(" user  is online, checking DB "+token.token);
+    
 });
 
-server.get("/save-marks:id", function(req, res) {
-    let marks = req.body,
-        id = req.params.id;
-    db.loginLogoutAPI({ id, marks }).then((data) => res.send(data)).catch((error) => console.log(error));
-    console.log("New marks to push!!!!" + marks);
-});
 
 server.listen(8082, function() {
     console.log("Server is ON!");
