@@ -5,7 +5,7 @@ $ mkdir data
 $ echo 'mongod --bind_ip=$IP --dbpath=data --nojournal --rest "$@"' > mongod
 $ chmod a+x mongod
   then :
-$  ./mongod
+    $  ./mongod
   after this  you can start Node.js
   $ node server.js
 and only after this:
