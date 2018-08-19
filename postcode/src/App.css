@@ -9,8 +9,12 @@
 
 .App-header {
   background-color: #222;
+  background-size: 50% 333% !important;
+  background-repeat: no-repeat !important;
+  background-position: 117% 27% !important;
   padding: 20px;
   color: white;
+
 }
 
 .compass-wrapper {

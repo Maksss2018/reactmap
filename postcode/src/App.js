@@ -6,6 +6,7 @@ import axios from 'axios';
 import { apiPrefix } from './configs/configs.json';
 import './App.css';
 import HomeMap from "./components/map";
+import logo from "./media/img/ukraineHigh.svg";
 import ListFromDB from "./components/listFromDb";
 import Ionicon from 'react-ionicons';
 const cookies = new Cookies();
@@ -71,7 +72,7 @@ class App extends Component {
 
     return (
       <Container fluid>
-        <Row className="App-header py-md-5 ">
+        <Row className="App-header py-md-5 " style={{background:`url(${logo})`,backgroundColor:"#222"}}>
         <Col xs={12} className="text-center animated-05s bounceInDown " >
         
         <span className="animated jackInTheBox" style={{fontSize:"1em"}}>
