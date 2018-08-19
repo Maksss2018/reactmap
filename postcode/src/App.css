@@ -14,7 +14,11 @@
   background-position: 117% 27% !important;
   padding: 20px;
   color: white;
+  transition: 0.5s!important;
+}
 
+h1 {
+  text-shadow: 1px 2px 3px #666!important;
 }
 
 .compass-wrapper {
@@ -25,6 +29,7 @@
   height: 60px;
   border: 1px solid #fff;
   border-radius: 100px;
+  background-color: #222;
 }
 
 .compass-wrapper:before {
@@ -99,6 +104,63 @@
   border: 0px solid #FFF!important;
 }
 
+.rc-slider,
+.rc-slider-rail,
+.rc-slider-track,
+.rc-slider-mark,
+.rc-slider-step {
+  height: 5px;
+}
+
+.rc-slider {
+  position: relative;
+  z-index: 0;
+}
+
+.rc-slider-rail {
+  background-color: #222;
+  position: absolute;
+  z-index: 1;
+}
+
+.rc-slider-track {
+  position: absolute;
+  background-color: #222;
+  z-index: 2;
+}
+
+.rc-slider-handle {
+  position: absolute;
+  top: -37%;
+  z-index: 20;
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 100px;
+}
+
+.rc-slider-step {
+  position: absolute;
+  top: -37%;
+  z-index: 5;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  border: 1px solid #222;
+  background-color: #FFF;
+}
+
+.rc-slider-mark {
+  height: 6px;
+  background-color: slategrey;
+}
+
+.foo {
+  position: absolute;
+  left: 46%;
+  top: 356.15px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -126,7 +188,33 @@
   }
 }
 
+
+
+@media screen and (max-width: 680px) {
+  .App-header {
+    background-size: 123% 201% !important;
+    background-repeat: no-repeat !important;
+    background-position: -4% 96% !important;
+    padding: 20px;
+    color: white;
+    -webkit-transition: 0.5s !important;
+    -o-transition: 0.5s !important;
+    transition: 0.5s !important;
+  }
+}
+
 @media screen and (max-width: 540px) {
+
+  .App-header {
+    background-color: #222;
+    background-size: 50% 333% !important;
+    background-repeat: no-repeat !important;
+    background-position: 117% 27% !important;
+    padding: 20px;
+    color: white;
+    transition: 0.5s!important;
+  }
+
 
   .compass-wrapper:before {
     content: "N";
@@ -147,5 +235,18 @@
     display: block;
     z-index: 3;
     font-size: 0.3em!important;
+  }
+}
+
+@media screen and (max-width: 412px) {
+  .App-header {
+    background-size: 100% 224% !important;
+    background-repeat: no-repeat !important;
+    background-position: -4% 96% !important;
+    padding: 20px;
+    color: white;
+    -webkit-transition: 0.5s !important;
+    -o-transition: 0.5s !important;
+    transition: 0.5s !important;
   }
 }

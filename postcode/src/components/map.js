@@ -44,11 +44,13 @@ class HomeMap extends Component {
         };
         this.HandelHovermarker = this.HandelHovermarker.bind(this);
     }
-
     onLoadMap(map) {
-        if (this.state.map !== null)
-            return
-        this.setState({ map: map })
+        if (this.state.map !== null) {
+
+            return this.setState({ map: map });
+        }
+
+
     }
     handelClickOnMap() {
         let map = this.state.map.isReactComponent;
@@ -66,12 +68,13 @@ class HomeMap extends Component {
         }) : [{ lat: 46.47, lng: 30.73, info: { address: "My native city Odessa  " }, postalCode: { longName: "65000", shortName: "65000" } }];
 
 
+
         return (
             <div style={{ height: '100vh', width: '100%' }}>
         <MapForTwitterKiller
         markers={ marks }
         hover={this.HandelHovermarker}
-        center={marks[marks.length-1]}    
+        center={ marks[marks.length-1] }  
         containerElement={
         <div style={{height:'100%'}}/>
         }
