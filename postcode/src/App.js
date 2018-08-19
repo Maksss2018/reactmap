@@ -7,6 +7,7 @@ import { apiPrefix } from './configs/configs.json';
 import './App.css';
 import HomeMap from "./components/map";
 import ListFromDB from "./components/listFromDb";
+import Ionicon from 'react-ionicons';
 const cookies = new Cookies();
 
 class App extends Component {
@@ -71,22 +72,31 @@ class App extends Component {
     return (
       <Container fluid>
         <Row className="App-header py-md-5 ">
-        <Col xs={12} className="text-center">
-        <h1>
+        <Col xs={12} className="text-center animated-05s bounceInDown " >
+        
+        <span className="animated jackInTheBox" style={{fontSize:"1em"}}>
+        by  Malyi M.G.
+        
+        </span>
+        <h1 className="animated-3s fadeIn">
         Find location by postal
+        <div className="compass-wrapper ml-3 my-sm-5" >
+        <Ionicon className="mx-1  my-0 arrow-shake" icon="ios-compass"  fontSize="55px" color="#fff"/>
+        </div>
+        
         </h1>
         </Col>
         </Row>
         <Row >
-        <Col xs={12}  md={4}>
+        <Col xs={12}  md={4} className="animated-1s fadeInUp " >
         <PostalForm
         places={"loading"}
         GetnewMarkslist={this.dbChanges}
         />
         </Col>
-        <Col xs={12}  md={4}>
+        <Col xs={12}  md={4} className="animated-2s fadeInUp " >
 
-        <Row className="my-5">
+        <Row className="my-2 my-md-5">
           <HomeMap
           token={this.state.token!==null?this.state.token:null}
           marks={list!==null?list.map((item)=>{
@@ -96,7 +106,7 @@ class App extends Component {
   
         </Col>
   
-        <Col xs={12} md={4} className="pt-1">
+        <Col xs={12} md={4} className=" py-2 pt-md-1 animated-3s fadeInUp " >
       <ListGroup className="mt-43"  >  
       <ListGroupItem className="no-border"  >
       <Label> Places you have already selected :</Label> 
