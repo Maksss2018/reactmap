@@ -1,7 +1,7 @@
 /*global google*/
 import React, { Component } from 'react';
 import { Marker, InfoWindow } from 'react-google-maps';
-import { ListGroup, ListGroupItem, Badge, Button } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 class CostumeMarker extends Component {
 
     constructor(props) {
@@ -14,17 +14,11 @@ class CostumeMarker extends Component {
 
 
     handelHovermarker() {
-        console.log(" hovered item");
         this.setState({ info: true });
     }
 
 
     render() {
-        console.log(" postal COde :" + JSON.stringify(this.props.postalCode));
-        /*
-			  <p>Long postal code : {this.props.postalCode.longName}</p>
-			 <p>short postal code :{this.props.postalCode.shortName} </p>*/
-
         return (
             <Marker
         className="animated infinite pulse "

@@ -60,7 +60,6 @@ class App extends Component {
   newUserEnter() {
 
     return axios.post(`${apiPrefix}/`).then((response) => {
-      console.log("response.data.user ========  " + response.data.user);
       cookies.set("center", { lat: 46.47, lng: 30.73 });
       cookies.set("token", response.data.user);
     }).catch((error) => { console.log(" ERROR " + error) });
@@ -93,14 +92,13 @@ class App extends Component {
     //  this.setState({ options });
 
     return axios.post(`${apiPrefix}/get-nearest-places`, { radius, type, center }).then((response) => {
-      console.log(" nearest " + type + " in radius " + radius + " == " + response.data);
+
       let error = response.data.length !== 0 ? null : " there is no places of this type  or it is may be that we break limit of requests to google API";
       this.setState({ error });
     }).catch((error) => { console.log(" ERROR " + error) });
   }
   getCenter(data) {
     let center = data;
-    console.log(" center =====" + center);
     this.setState({ center });
   }
 
@@ -150,7 +148,6 @@ class App extends Component {
         <FormGroup className="mb-2 mr-sm-2 mb-sm-0"  >
           <Label for="placesType" className="mr-2">Places type</Label>
           <Input defaultValue={"select type"}    onChange={(e)=>{ 
-          console.log(" type "+e.target.value);
           this.setState({type:e.target.value}); }}  type="select" name="placesType" id="placesType">
             {typesList}
           </Input>

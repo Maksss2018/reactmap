@@ -18,10 +18,6 @@ class ListFromDB extends Component {
 
 
     render() {
-        console.log(" postal COde :" + JSON.stringify(this.props.postalCode));
-        /*
-			  <p>Long postal code : {this.props.postalCode.longName}</p>
-			 <p>short postal code :{this.props.postalCode.shortName} </p>*/
 
         return (
             <ListGroupItem  

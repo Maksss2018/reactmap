@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const configs = require('./configs.json'); //services/mongoose/configs.json
+const configs = require('./configs.json');
 require('./models/user-model');
 const UIDGenerator = require('uid-generator');
 const uidgen = new UIDGenerator();
@@ -111,47 +111,13 @@ exports.loginLogoutAPI = function(data) {
             });
         }
     });
-    /* Model.updateOne(
-      { "name" : data.name, "password":data.password },
-      { $set: { "LogIn:" : !data.logIn } }, function(err, result){
-    if (err) {
-        console.log('Error updating object: ' + err);
-      
-    } else {
-        console.log('' + result + ' document(s) updated');
-    return result;
-    }
-                                                                 }
-   );*/
-}
-exports.updateMarks = function(data) {
-    return Model.updateOne({ "id": data.id }, { $set: { "marks:": data.marks } }, function(err, result) {
-        if (err) {
-            console.log('Error updating object: ' + err);
-
-        }
-        else {
-            console.log('' + result + ' document(s) updated');
-        }
-    });
 }
 
 exports.deleteMark = function(data) {
-    console.log('TO DELET : ' + data.adress);
     return Model.updateOne({ "user": data.token }, { $pull: { arrayOfmarks: { adress: data.adress } } }, function(err, result) {
         if (err) {
             console.log('Error updating object: ' + err);
 
         }
-        else {
-            console.log('' + JSON.stringify(result) + ' document(s) updated');
-        }
     });
 }
-
-/*
- {cn: req.params.name}, { $pullAll: {uid: [req.params.deleteUid] } } 
-export function deleteItem(id){
-   return   Model.findById(id).remove();
-}
-*/
