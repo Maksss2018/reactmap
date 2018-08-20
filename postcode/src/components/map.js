@@ -19,6 +19,7 @@ const MapForTwitterKiller = withGoogleMap((props) => {
     defaultZoom = { 12 }
     center={props.center}
     onClick={props.onClick}
+    options={props.options}
     ref={props.onMapLoad}
         >
         {props.markers!=null?props.markers.map((item,index)=>{
@@ -61,18 +62,22 @@ class HomeMap extends Component {
     }
 
     render() {
-
+        let options = this.props.options !== null ? this.props.options : null;
         let marks = this.props.marks !== null ? this.props.marks.map(function(item, ind) {
             console.log("MAPS POSTAL ==" + JSON.stringify(item.info));
             return { lat: Number(item.lat), lng: Number(item.lng), info: item.info, postalCode: { longName: item.info.postalCode.long_name, shortName: item.info.postalCode.short_name } }
         }) : [{ lat: 46.47, lng: 30.73, info: { address: "My native city Odessa  " }, postalCode: { longName: "65000", shortName: "65000" } }];
-
-
+        let plusMarks = this.props.marksRadius !== null ? this.props.marksRadius.map((mark, ind) => {
+            ind !== 0 ? false : console.log("  data  from nearest pl :  " + JSON.stringify(mark));
+            return mark
+        }) : null;
+        plusMarks !== null ? marks.concat(plusMarks) : false;
 
         return (
             <div style={{ height: '100vh', width: '100%' }}>
         <MapForTwitterKiller
         markers={ marks }
+        options={options!==null?options:null}
         hover={this.HandelHovermarker}
         center={ marks[marks.length-1] }  
         containerElement={

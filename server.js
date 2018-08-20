@@ -14,12 +14,24 @@ server.use(bodyParser.json());
 
 server.use(cors({ origin: '*' }));
 
-server.post("/all-types", function(req, res) {
 
-    db.getSpaData().then((data) => res.send(data)).catch((error) => console.log("server get error  from DB" + error));
+server.post("/get-nearest-places", function(req, res) {
+    let data = req.body,
+        url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${data.center.lat},${data.center.lng}&radius=${data.radius}&type=${data.type}&key=AIzaSyB2Dt6pCKcFvO4FxADbJDoK8gnvKNkLS1w`;
+    let cross;
+    request.get(url, (error, response, body) => {
+        console.log("response.body nearbysearch  : " + response.body);
+        return googleResponse = JSON.parse(response.body);
 
+    });
 
+    setTimeout(function() {
+        console.log("googleResponse.results : " + googleResponse.results);
+        res.send(googleResponse.results);
+
+    }, 500)
 });
+
 
 server.post("/", function(req, res) {
     let newUser = req.body;

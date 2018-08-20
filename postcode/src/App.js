@@ -1,3 +1,4 @@
+/*global google*/
 import React, { Component } from 'react';
 import { Container, Row, Col, Label, ListGroup, ListGroupItem, Form, FormGroup, Input, Button } from 'reactstrap';
 import PostalForm from './components/form.js';
@@ -12,6 +13,7 @@ import optionsMap from "./media/placestypes.json";
 import Ionicon from 'react-ionicons';
 import './media/less/index.less';
 import Slider, { createSliderWithTooltip } from 'rc-slider';
+import { withGoogleMap, GoogleMap } from 'react-google-maps';
 const cookies = new Cookies();
 const SliderWithTooltip = createSliderWithTooltip(Slider);
 
@@ -28,7 +30,10 @@ class App extends Component {
       token: null,
       radius: null,
       type: null,
-      center: null
+      center: null,
+      marksRadius: null,
+      options: null,
+      error: null
     };
     this.newUserEnter = this.newUserEnter.bind(this);
     this.dbChanges = this.dbChanges.bind(this);
@@ -56,6 +61,7 @@ class App extends Component {
 
     return axios.post(`${apiPrefix}/`).then((response) => {
       console.log("response.data.user ========  " + response.data.user);
+      cookies.set("center", { lat: 46.47, lng: 30.73 });
       cookies.set("token", response.data.user);
     }).catch((error) => { console.log(" ERROR " + error) });
 
@@ -82,9 +88,14 @@ class App extends Component {
     let radius = this.state.radius,
       type = this.state.type,
       center = cookies.get("center");
+    //  location = cookies.get("center"),
+    //    options = location !== null || type !== null || radius !== null ? { location, type, radius } : null;
+    //  this.setState({ options });
 
     return axios.post(`${apiPrefix}/get-nearest-places`, { radius, type, center }).then((response) => {
       console.log(" nearest " + type + " in radius " + radius + " == " + response.data);
+      let error = response.data.length !== 0 ? null : " there is no places of this type  or it is may be that we break limit of requests to google API";
+      this.setState({ error });
     }).catch((error) => { console.log(" ERROR " + error) });
   }
   getCenter(data) {
@@ -96,6 +107,7 @@ class App extends Component {
   render() {
 
     let list = this.state.usersList,
+      rList = this.state.marksRadius,
       typesList = optionsMap.types.map((type, index) => {
         return <option key={`map-types-${index}`}  value={type} >{type}</option>
       });
@@ -143,7 +155,11 @@ class App extends Component {
             {typesList}
           </Input>
         </FormGroup>
-        <Button>Submit</Button>
+        <Button> Submit  </Button>
+          <FormGroup className={`mb-2 mr-sm-2 mb-sm-0  ${ this.state.error!==null?" animated bounceIn ":null} `}  >
+          <Label for="placesType" className="mr-2">  { this.state.error!==null?this.state.error:null}</Label>
+        </FormGroup>
+
 </Form>
       </Col>  
         </Row>
@@ -160,9 +176,11 @@ class App extends Component {
         <Row className="my-2 my-md-5">
           <HomeMap
           token={this.state.token!==null?this.state.token:null}
+          marksRadius={rList!==null?rList:null}
+          options={this.state.options}
           marks={list!==null?list.map((item)=>{
           list.length!==0 ?cookies.set("center", { lat: Number(list[list.length - 1].latLng[0]), lng: Number(list[list.length - 1].latLng[1]) }) : cookies.set("center", { lat: 46.47, lng: 30.73 });
-          return { lat:item.latLng[0],lng:item.latLng[1], info:{address:item.adress, postalCode: item.postalCode }} }):null}
+        return { lat:item.latLng[0],lng:item.latLng[1], info:{address:item.adress, postalCode: item.postalCode }} }):null}
           getCenter={this.getCenter}
           />        
         </Row>
